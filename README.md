@@ -1,5 +1,7 @@
 # Client Side Diagram
 
+Preview: [https://paul-hammant.github.io/cs_diagram/](https://paul-hammant.github.io/cs_diagram/)
+
 Goals:
 
 1. 100% ABI needed for "vertically align top edge of shapes to topmost of the edges of the selected shapes"
