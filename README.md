@@ -10,7 +10,7 @@ Preview: [https://paul-hammant.github.io/cs_diagram/](https://paul-hammant.githu
 
 # Constraints
 
-1. Toolbar buttosn should pop an overlay that has a sandboxed iFrame that deals via window.postMessage(..)
+1. Toolbar buttons should pop an overlay that has a sandboxed iFrame that deals via window.postMessage(..)
 2. All served from SAME ORIGIN, yet **constrained** per #1
 3. All statically hosted - no server components **for now**. No persistence of the shape alignments needed while testing the operations on the SVG canvas
 2. For enhancements to this prototype, we walk a skeleton.  Thin vertical slices and all that.
