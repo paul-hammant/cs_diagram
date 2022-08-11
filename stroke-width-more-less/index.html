@@ -1,0 +1,45 @@
+<html>
+<body>
+<script>
+
+    var diff = null;
+
+    function widthsResponseListener() {
+        window.addEventListener("message", (e) => {
+            widths = e.data.substring("Response=".length).split(",").map(Number);
+            if (diff > 0) {
+                widths = widths.reverse();
+            }
+            widths.forEach(w => {
+                window.parent.postMessage("$(\"#Canvas_Layer_1 [stroke-width*='" + w + "']\").attr('stroke-width', " + (w + diff) + ");", "*");
+            });
+        });
+    }
+
+    function getListOfStrokeWidths(d) {
+        diff = d;
+        window.parent.postMessage("? $.uniqueSort($('#Canvas_Layer_1 [stroke-width]').map(function(x) {" +
+            "                     return this.getAttribute('stroke-width');" +
+            "                 }).get().sort()).join();", "*");
+    }
+
+    widthsResponseListener();
+
+    function more() {
+        getListOfStrokeWidths(+1);
+    }
+
+    function less() {
+        getListOfStrokeWidths(-1);
+    }
+
+    function okButton() {
+        window.parent.postMessage("close()", "*");
+    }
+
+</script>
+<button onclick="more()">More</button>
+<button onclick="less()">Less</button>
+<button onClick="okButton()">ok</button>
+</body>
+</html>
