@@ -1,10 +1,10 @@
 <html>
 <head>
     <title>Client Side Diagramming</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<h1>Client Side Diagramming (walking skeleton)</h1>
+<h1>Client Side Diagramming prototype</h1>
 <div id="tb"></div>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
      viewBox="112.5 82.5 736 70" width="736" height="70">
@@ -82,15 +82,14 @@
     </g>
 </svg>
 <hr>
-<p>Source in <a href="https://github.com/paul-hammant/cs_diagram/">GitHub Repo</a> ... don't hold your breath</p>
+<p>Source in <a href="https://github.com/paul-hammant/cs_diagram/">GitHub Repo</a>. This is a walking skeleton, don't hold your breath for fast progress!</p>
 <div style="max-height: 100px" id="term"></div>
 </body>
 <script>
 
-    function attachMessageHandler(childWindow) {
+    function attachMessageHandler() {
         window.addEventListener("message", (e) => {
-            var data = e.data;
-            if (data.startsWith("close()")) {
+            if (e.data.startsWith("close()")) {
                 $("#tb").html("<div/>");
                 $("#toolbar").css("pointer-events","auto");
             } else {
@@ -100,12 +99,10 @@
                 // .. and think of sand-boxed iframe in a sandboxed iframe to distance the container (this scope)
                 // and the contained tool-bar widget with potentially malicious code
 
-                if (data.startsWith("? ")) {
-                    let rsp = eval(data.substring("? ".length));
-                    let src = e.source;
-                    src.postMessage("Response=" + rsp, childWindow);
+                if (e.data.startsWith("? ")) {
+                    e.source.postMessage("Response=" + eval(e.data.substring("? ".length)), e.origin);
                 } else {
-                    eval(data);
+                    eval(e.data);
                 }
             }
         });
@@ -114,9 +111,7 @@
         $("#toolbar").css("pointer-events","none");
         $("#tb").html("<iframe id='tb_item' sandbox='allow-scripts allow-same-origin' src='"+url+"' " +
             "style=\"position:absolute;height:400px;width:400%;border:none;overflow:hidden;\"><iframe>");
-        childWindow = document.getElementById("tb_item");
-        attachMessageHandler(childWindow);
-
+        attachMessageHandler();
     }
 
     $('#fill_color').click(function () { overlaySandboxedToolBarIFrame("jscolor-picker/jscolor-a2cafbbfc1.html"); });
