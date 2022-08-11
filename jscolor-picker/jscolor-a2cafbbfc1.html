@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>jscolor Configuration Preview</title>
+</head>
+
+<body>
+
+
+<script src="jscolor.js"></script>
+
+<script>
+    // These options apply to all color pickers on the page
+    jscolor.presets.default = {
+        palette: '#cccccc'
+    };
+</script>
+
+<input id="picker" value="#FFD700" data-jscolor="{}">
+<script>
+    function chgColor() {
+        let hex = document.querySelector('#picker').jscolor.toHEXString();
+        window.parent.postMessage("$('#Canvas_Layer_1 [fill]').attr('fill', '" + hex + "');", "*");
+    }
+
+    function close() {
+        window.parent.postMessage("close()", "*");
+    }
+
+    function okButton() {
+        chgColor();
+        close();
+    }
+    function applyButton() {
+        chgColor();
+    }
+    function cancelButton() {
+        close();
+    }
+</script>
+<button onclick="okButton()">ok</button>
+<button onclick="applyButton()">apply</button>
+<button onclick="cancelButton()">cancel</button>
+
+</body>
+</html>
+<!-- Downloaded from http://jscolor.com -->
