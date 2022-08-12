@@ -1,8 +1,10 @@
 # Client Side Diagramming
 
-Preview: [https://paul-hammant.github.io/cs_diagram/](https://paul-hammant.github.io/cs_diagram/)
+Preview on Github-Pages: [https://paul-hammant.github.io/cs_diagramming](https://paul-hammant.github.io/cs_diagramming/)
 
 [The Principles of Containment](https://paulhammant.com/2016/12/14/principles-of-containment) applies.
+
+I wrote a blog entry too: [Principles of Containment in the DOM](https://paulhammant.com/2022/08/12/principles-of-containment-in-the-dom/) - Aug 12, 2022.
 
 # Goals
 
